@@ -5,18 +5,21 @@ import java.sql.DriverManager;
 
 class Product{
     String name;
-    int price;
+    int number;
+    String zadacha;
 
-    Product(String name,int price){
+    Product(String name,int number, String zadacha){
         this.name=name;
-        this.price=price;
+        this.number=number;
+        this.zadacha=zadacha;
     }
     void showTowar(){
-        System.out.println(name + " - " + price);
+        System.out.println(name + " - " + number + " - " + zadacha);
     }
 
     public String getName(){return name;}
-    public int getPrice(){return price;}
+    public int getNumber(){return number;}
+    public String getZadacha(){return zadacha;}
 
 }
 public class Main{
@@ -25,10 +28,14 @@ public class Main{
             System.out.println("database connected");
         }
         Scanner cin = new  Scanner(System.in);
+        int number = Integer.parseInt(cin.nextLine());
         String name = cin.nextLine();
-        int price = Integer.parseInt(cin.nextLine());
-        Product pro =  new Product(name, price);
+        String zadacha = cin.nextLine();
+        Product pro =  new Product(name, number, zadacha);
         ProductDAO dao = new ProductDAO();
         dao.addProduct(pro);
+        System.out.print("Enter task number to delete: ");
+        int num = cin.nextInt();
+        dao.delProduct(num);
     }
 }
