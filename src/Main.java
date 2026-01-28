@@ -27,15 +27,53 @@ public class Main{
         if(Database.connect()!=null){
             System.out.println("database connected");
         }
-        Scanner cin = new  Scanner(System.in);
-        int number = Integer.parseInt(cin.nextLine());
-        String name = cin.nextLine();
-        String zadacha = cin.nextLine();
-        Product pro =  new Product(name, number, zadacha);
-        ProductDAO dao = new ProductDAO();
-        dao.addProduct(pro);
-        System.out.print("Enter task number to delete: ");
-        int num = cin.nextInt();
-        dao.delProduct(num);
+        Scanner cin = new Scanner(System.in);
+        boolean running = true;
+
+        System.out.println("=== СИСТЕМА УПРАВЛЕНИЯ ТОВАРАМИ ===");
+
+        while (running) {
+            System.out.println("\nВыберите действие:");
+            System.out.println("1. Добавить новый товар");
+            System.out.println("2. Удалить товар по номеру");
+            System.out.println("3. Выход");
+            System.out.print("Введите номер пункта: ");
+
+            String choice = cin.nextLine();
+            ProductDAO dao = new ProductDAO();
+
+            switch (choice) {
+                case "1":
+                    System.out.print("Введите номер (ID): ");
+                    int num = Integer.parseInt(cin.nextLine());
+                    System.out.print("Введите название: ");
+                    String name = cin.nextLine();
+                    System.out.print("Введите задачу/описание: ");
+                    String task = cin.nextLine();
+
+                    Product newProduct = new Product(name, num, task);
+                    dao.addProduct(newProduct);
+                    System.out.println("Товар успешно добавлен.");
+                    break;
+
+                case "2":
+                    System.out.print("Введите номер товара для удаления: ");
+                    int idToDelete = Integer.parseInt(cin.nextLine());
+                    dao.delProduct(idToDelete);
+                    System.out.println("Команда на удаление отправлена.");
+                    break;
+
+                case "3":
+                    System.out.println("Завершение работы...");
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println("Неверный ввод, попробуйте снова.");
+            }
+        }
+        cin.close();
     }
 }
+
+
