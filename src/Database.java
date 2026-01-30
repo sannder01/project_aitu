@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 
 public class Database{
 
-    static final String URL = "jdbc:postgresql://localhost:5432/project_aitu";
+    static final String URL = "jdbc:postgresql://localhost:5432/group_project_sannder";
     static final String USER  = "postgres";
     static final String PASSWORD = "Smartdrv3";
 

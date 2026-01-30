@@ -1,6 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ProductDAO {
     public void addProduct(Product pro) {
@@ -42,6 +40,35 @@ public class ProductDAO {
             e.printStackTrace();
         }
     }
+    public void showAllProducts() {
+        String sql = "SELECT number, name, zadacha FROM public.tasks ORDER BY number";
+
+        try (Connection connect = Database.connect();
+             PreparedStatement stmt = connect.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("\n===== СПИСОК ТОВАРОВ =====");
+
+            boolean empty = true;
+            while (rs.next()) {
+                empty = false;
+
+                int number = rs.getInt("number");
+                String name = rs.getString("name");
+                String zadacha = rs.getString("zadacha");
+
+                System.out.println(number + " | " + name + " | " + zadacha);
+            }
+
+            if (empty) {
+                System.out.println("Список пуст.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

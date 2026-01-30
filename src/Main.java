@@ -36,7 +36,8 @@ public class Main{
             System.out.println("\nВыберите действие:");
             System.out.println("1. Добавить новый товар");
             System.out.println("2. Удалить товар по номеру");
-            System.out.println("3. Выход");
+            System.out.println("3. Показать товары");
+            System.out.println("4. Выход");
             System.out.print("Введите номер пункта: ");
 
             String choice = cin.nextLine();
@@ -44,7 +45,7 @@ public class Main{
 
             switch (choice) {
                 case "1":
-                    System.out.print("Введите номер (ID): ");
+                    System.out.print("Введите номер: ");
                     int num = Integer.parseInt(cin.nextLine());
                     System.out.print("Введите название: ");
                     String name = cin.nextLine();
@@ -64,6 +65,10 @@ public class Main{
                     break;
 
                 case "3":
+                    dao.showAllProducts();
+                    break;
+
+                case "4":
                     System.out.println("Завершение работы...");
                     running = false;
                     break;
